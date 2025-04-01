@@ -75,6 +75,11 @@ namespace ChatbotPart1
 
                         break;
 
+                    case " What is a strong password to use":
+                        TypingDelay(" Length: Aim for at least 12 characters, though more is even better. Longer passwords are harder to crack.\r\n\r\nComplexity: Use a mix of:\r\n\r\nUppercase letters (A-Z)\r\n\r\nLowercase letters (a-z)\r\n\r\nNumbers (0-9)\r\n\r\nSpecial characters (e.g., !, @, #, $, %, ^, &, *)");
+
+                        break;
+
 
                         
 
