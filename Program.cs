@@ -80,8 +80,19 @@ namespace ChatbotPart1
 
                         break;
 
+                    case "how to avoid phishing attacks?":
+                        TypingDelay("Be cautious of unsolicited emails: Don't click on links or open attachments from unknown sources.\r\n\r\nVerify the sender: Check the email address carefully and hover over links to check the URL.\r\n\r\nUse HTTPS: Ensure websites have \"https\" and a padlock symbol before entering sensitive info.\r\n\r\nEnable Multi-Factor Authentication (MFA): Adds extra protection even if your password is compromised.\r\n\r\nKeep software updated: Install the latest security patches and use antivirus tools.");
 
-                        
+                         break;
+
+                    case "how to browse safely online?":
+                        TypingDelay("Use HTTPS, keep software updated, enable 2FA, avoid phishing links, use strong passwords, be cautious with downloads, limit personal info sharing, install an ad blocker, and clear cookies regularly. Consider a VPN and a privacy-focused browser.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+
+
+                        break;
+                    case "what do i need to know about cybersecurity? ":
+                        TypingDelay("Use strong passwords & 2FA, avoid phishing & malware, keep software updated, use secure networks & VPNs, limit data sharing, browse with HTTPS & ad blockers, and back up files regularly. Stay alert to scams & social engineering.");
+                        break;
 
                         default:
                         TypingDelay("sorry i dont understand");
