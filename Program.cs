@@ -12,12 +12,14 @@ namespace ChatbotPart1
     internal class Program
     {
         static void Main(string[] args)
-        {//Call out the Methods
+        {
+            // Call out the Methods
             DisplayLogo();
             DisplayVoiceGreeting();
             DisplayGreetUser();
             DisplayUserInputs();
         }
+
         static void DisplayLogo()
         {
             string logo = @"
@@ -26,8 +28,7 @@ namespace ChatbotPart1
   / / / __ \/ _ \   / /_/ / / / /_  /_  /    / /   / __ \/ __ `/ __/ __ \/ __ \/ __/
  / / / / / /  __/  / __  / /_/ / / /_/ /_   / /___/ / / / /_/ / /_/ /_/ / /_/ / /_  
 /_/ /_/ /_/\___/  /_/ /_/\__,_/ /___/___/   \____/_/ /_/\__,_/\__/_.___/\____/\__/  
-                                                                                    
-";
+                                                                                    ";
             Console.WriteLine(logo);
         }
 
@@ -35,86 +36,69 @@ namespace ChatbotPart1
         {
             try
             {
-                SoundPlayer soundPlayer = new SoundPlayer("welcome.wav");//location of the sound file
-                soundPlayer.PlaySync();//makes the code wait for the sound to finish playing
-
+                SoundPlayer soundPlayer = new SoundPlayer("welcome.wav"); // Location of the sound file
+                soundPlayer.PlaySync(); // Makes the code wait for the sound to finish playing
             }
-            catch (Exception ex) //Error message if you can not find the audio
+            catch (Exception ex) // Error message if the audio file cannot be found
             {
-                Console.WriteLine("Error Audio can not be found:  " + ex.Message);
-
-
+                Console.WriteLine("Error: Audio cannot be found: " + ex.Message);
             }
-
-
         }
 
         static void DisplayGreetUser()
         {
             Console.WriteLine("What is your name?");
             var userName = Console.ReadLine();
-            TypingDelay($"\nHello,{userName}!Welcom to The Huzz Chatbot,where you can be infored about the internet.");
-
+            TypingDelay($"\nHello, {userName}! Welcome to The Huzz Chatbot, where you can be informed about the internet.");
         }
+
         static void DisplayUserInputs()
         {
             while (true)
             {
-                Console.WriteLine("How can i help you ");
-                string input = Console.ReadLine().Trim().ToLower();//allows to print the input in diffrent cases
-
+                Console.WriteLine("How can I help you?");
+                string input = Console.ReadLine().Trim().ToLower(); // Normalize user input
 
                 if (input == "exit")
                     break;
 
-
                 switch (input)
                 {
-                    case "how are you ?":
-                        TypingDelay("I'm just a bot, but i'm here to help you stay safe online");
-
+                    case "how are you?":
+                        TypingDelay("I'm just a bot, but I'm here to help you stay safe online.");
                         break;
 
-                    case " What is a strong password to use":
-                        TypingDelay(" Length: Aim for at least 12 characters, though more is even better. Longer passwords are harder to crack.\r\n\r\nComplexity: Use a mix of:\r\n\r\nUppercase letters (A-Z)\r\n\r\nLowercase letters (a-z)\r\n\r\nNumbers (0-9)\r\n\r\nSpecial characters (e.g., !, @, #, $, %, ^, &, *)");
-
+                    case "what is a strong password to use?":
+                        TypingDelay("A strong password should be at least 12 characters long and include uppercase and lowercase letters, numbers, and special characters.");
                         break;
 
                     case "how to avoid phishing attacks?":
-                        TypingDelay("Be cautious of unsolicited emails: Don't click on links or open attachments from unknown sources.\r\n\r\nVerify the sender: Check the email address carefully and hover over links to check the URL.\r\n\r\nUse HTTPS: Ensure websites have \"https\" and a padlock symbol before entering sensitive info.\r\n\r\nEnable Multi-Factor Authentication (MFA): Adds extra protection even if your password is compromised.\r\n\r\nKeep software updated: Install the latest security patches and use antivirus tools.");
-
-                         break;
+                        TypingDelay("Be cautious of emails from unknown sources, verify senders, use HTTPS, enable Multi-Factor Authentication (MFA), and keep your software updated.");
+                        break;
 
                     case "how to browse safely online?":
-                        TypingDelay("Use HTTPS, keep software updated, enable 2FA, avoid phishing links, use strong passwords, be cautious with downloads, limit personal info sharing, install an ad blocker, and clear cookies regularly. Consider a VPN and a privacy-focused browser.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
-
-
-                        break;
-                    case "what do i need to know about cybersecurity? ":
-                        TypingDelay("Use strong passwords & 2FA, avoid phishing & malware, keep software updated, use secure networks & VPNs, limit data sharing, browse with HTTPS & ad blockers, and back up files regularly. Stay alert to scams & social engineering.");
+                        TypingDelay("Use HTTPS, enable 2FA, avoid phishing links, use strong passwords, limit personal info sharing, and consider using a VPN.");
                         break;
 
-                        default:
-                        TypingDelay("sorry i dont understand");
+                    case "what do I need to know about cybersecurity?":
+                        TypingDelay("Use strong passwords, enable 2FA, avoid phishing and malware, keep software updated, use secure networks, and back up important files.");
                         break;
 
+                    default:
+                        TypingDelay("Sorry, I don't understand. Please try again.");
+                        break;
                 }
             }
         }
 
-        
         static void TypingDelay(string message)
         {
-            foreach (char c in message) 
+            foreach (char c in message)
             {
                 Console.Write(c);
-                Thread.Sleep(30);//30mins delay the bot typing to make it more humaine
+                Thread.Sleep(30); // 30ms delay to simulate human typing
             }
             Console.WriteLine("\n");
         }
-
-
-
-
-     }
+    }
 }
