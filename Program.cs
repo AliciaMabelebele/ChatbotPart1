@@ -126,7 +126,7 @@ namespace ChatbotPart2
         }
 
         static void TypingDelay(string message)
-        {
+        { 
             foreach (char c in message)
             {
                 Console.Write(c);
