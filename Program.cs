@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Media;
 using System.Threading;
-using System.Runtime.InteropServices.ComTypes;
+using System.IO;
 
-namespace ChatbotPart1
+namespace ChatbotPart2
 {
     internal class Program
     {
+        static string userName = "";
+        static string userMood = "";
+
         static void Main(string[] args)
         {
             // Call out the Methods
@@ -36,10 +39,17 @@ namespace ChatbotPart1
         {
             try
             {
-                SoundPlayer soundPlayer = new SoundPlayer("welcome.wav"); // Location of the sound file
-                soundPlayer.PlaySync(); // Makes the code wait for the sound to finish playing
+                if (File.Exists("welcome.wav"))
+                {
+                    SoundPlayer soundPlayer = new SoundPlayer("welcome.wav");
+                    soundPlayer.PlaySync(); // Wait for sound to finish
+                }
+                else
+                {
+                    Console.WriteLine("Audio file 'welcome.wav' not found.");
+                }
             }
-            catch (Exception ex) // Error message if the audio file cannot be found
+            catch (Exception ex)
             {
                 Console.WriteLine("Error: Audio cannot be found: " + ex.Message);
             }
@@ -48,45 +58,69 @@ namespace ChatbotPart1
         static void DisplayGreetUser()
         {
             Console.WriteLine("What is your name?");
-            var userName = Console.ReadLine();
+            userName = Console.ReadLine();
             TypingDelay($"\nHello, {userName}! Welcome to The Huzz Chatbot, where you can be informed about the internet.");
+
+            Console.WriteLine("How are you feeling today?");
+            userMood = Console.ReadLine().ToLower();
+            RespondToMood(userMood);
+        }
+
+        static void RespondToMood(string mood)
+        {
+            if (mood.Contains("happy") || mood.Contains("good"))
+            {
+                TypingDelay("I'm glad to hear you're doing well!");
+            }
+            else if (mood.Contains("sad") || mood.Contains("down"))
+            {
+                TypingDelay("I'm sorry to hear that. I hope I can make your day a little better with some helpful tips.");
+            }
+            else if (mood.Contains("angry") || mood.Contains("frustrated"))
+            {
+                TypingDelay("I understand how frustrating things can be. Let me know if there's anything specific I can help you with.");
+            }
+          Console.WriteLine("Thanks for sharing.");
+         
         }
 
         static void DisplayUserInputs()
         {
             while (true)
             {
-                Console.WriteLine("How can I help you?");
-                string input = Console.ReadLine().Trim().ToLower(); // Normalize user input
+                Console.WriteLine($"\n{userName}, how can I help you?");
+                string input = Console.ReadLine().Trim().ToLower();
 
                 if (input == "exit")
-                    break;
-
-                switch (input)
                 {
-                    case "how are you?":
-                        TypingDelay("I'm just a bot, but I'm here to help you stay safe online.");
-                        break;
+                    TypingDelay("Goodbye! Stay safe online.");
+                    break;
+                }
 
-                    case "what is a strong password to use?":
-                        TypingDelay("A strong password should be at least 12 characters long and include uppercase and lowercase letters, numbers, and special characters.");
-                        break;
-
-                    case "how to avoid phishing attacks?":
-                        TypingDelay("Be cautious of emails from unknown sources, verify senders, use HTTPS, enable Multi-Factor Authentication (MFA), and keep your software updated.");
-                        break;
-
-                    case "how to browse safely online?":
-                        TypingDelay("Use HTTPS, enable 2FA, avoid phishing links, use strong passwords, limit personal info sharing, and consider using a VPN.");
-                        break;
-
-                    case "what do I need to know about cybersecurity?":
-                        TypingDelay("Use strong passwords, enable 2FA, avoid phishing and malware, keep software updated, use secure networks, and back up important files.");
-                        break;
-
-                    default:
-                        TypingDelay("Sorry, I don't understand. Please try again.");
-                        break;
+                // Keyword recognition logic
+                if (input.Contains("password"))
+                {
+                    TypingDelay("Make sure to use strong, unique passwords for each account. Avoid using personal details in your passwords.");
+                }
+                else if (input.Contains("scam") || input.Contains("phishing"))
+                {
+                    TypingDelay("Scams often appear as legitimate messages. Avoid clicking unknown links or giving out personal information.");
+                }
+                else if (input.Contains("privacy"))
+                {
+                    TypingDelay("Protect your privacy by limiting what you share online and reviewing app permissions regularly.");
+                }
+                else if (input.Contains("cybersecurity"))
+                {
+                    TypingDelay("Cybersecurity means protecting your systems, devices, and data from digital threats like malware and hackers.");
+                }
+                else if (input.Contains("help"))
+                {
+                    TypingDelay("You can ask me about:\n- Password safety\n- Scam or phishing protection\n- Online privacy\nType 'exit' to quit.");
+                }
+                else
+                {
+                    TypingDelay("I'm not sure how to respond to that. Try asking about password safety, scams, or online privacy.");
                 }
             }
         }
