@@ -125,7 +125,7 @@ namespace ChatbotPart2
             }
         }
 
-        static void TypingDelay(string message)
+        static void TypingDelay(string message) 
         { 
             foreach (char c in message)
             {
